@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <title>Online Quiz</title>
+        <link rel="stylesheet" href="Assets/style.css" />
+
+    </head>
+    <body>
+
+    <main class="wrapper">
+
+        <header>
+            
+            <h1 style="text-align: center;">Coding Quiz</h1>
+        
+            <div id="scoreContainer" style="display: none; text-align: center;"></div>
+            
+        </header>
+        
+        
+        <section id="quiz" class="quiz">   
+            
+            <div id="onStart" class="quiz-header">
+                <h2>Are you ready?</h2>
+            </div>
+
+            <div id="quiz-body">
+            
+                <div id="question"></div>
+
+                <div id="choiceBtns">
+                    <div id="A" class="choice" onclick="checkAnswer('A')"></div>   
+                    <div id="B" class="choice" onclick="checkAnswer('B')"></div>    
+                    <div id="C" class="choice" onclick="checkAnswer('C')"></div>
+                    <div id="D" class="choice" onclick="checkAnswer('D')"></div>
+                    <div id="E" class="choice" onclick="checkAnswer('E')"></div>
+                </div>
+
+            </div>
+
+            
+            
+            <div class="quiz-footer">
+                <button id="start" class="btn">Start Quiz!</button>
+                
+                <div id="timer">
+                    <div id="counter"></div>
+                    <div id="btimeGauge"></div>
+                    <div id="timeGauge"></div>
+                </div>
+                
+                <div id="progress"></div>
+            </div>
+
+        </section>
+    </main>
+    
+    
+    <script src="Assets/script.js"></script>  
+</body>
+</html>
