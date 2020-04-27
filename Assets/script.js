@@ -73,17 +73,6 @@ var questionTime = 15,
 let TIMER;
 let score = 0;
 
-// Display a question.
-function renderQuestion(){
-    let q = questions[runningQuestion];
-    
-    question.innerHTML = "<p>"+ q.question +"</p>";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    choiceC.innerHTML = q.choiceC;
-    choiceD.innerHTML = q.choiceD;
-    choiceE.innerHTML = q.choiceE;
-}
 
 start.addEventListener("click",startQuiz);
 
@@ -97,6 +86,18 @@ function startQuiz(){
     renderProgress();
     renderCounter();
     TIMER = setInterval(renderCounter,1000);
+}
+
+// Display a question.
+function renderQuestion(){
+    let q = questions[runningQuestion];
+    
+    question.innerHTML = "<p>"+ q.question +"</p>";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
+    choiceE.innerHTML = q.choiceE;
 }
 
 // Display the progress circles.

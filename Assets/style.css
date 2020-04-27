@@ -73,7 +73,9 @@ header {
   display: inline-block;
   width: 135px;
   text-align: center;
-  border: 1px solid grey;
+  border: 2px solid grey;
+  background-color: grey;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
   padding: 5px;
@@ -81,27 +83,13 @@ header {
 }
 
 .choice:hover {
-  border : 2px solid grey;
+  border : 2px solid black;
   font-weight: bold;
+  color: white;
+  background-color: grey;
 }
 
 .btn {
-  border: none;
-  background-color: mediumseagreen;
-  border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
-    0px;
-  color: hsl(0, 0%, 100%);
-  display: inline-block;
-  font-size: 22px;
-  line-height: 22px;
-  margin: 16px 16px 16px 20px;
-  padding: 14px 34px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.answerBtn {
   border: none;
   background-color: mediumseagreen;
   border-radius: 25px;
@@ -124,6 +112,11 @@ header {
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
+}
+
+.question {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .float-right {
@@ -151,12 +144,12 @@ button[disabled] {
 }
 
 #progress {
-  width : 500px;
+  width: 500px;
   position: absolute;
-  bottom : 0px;
-  right : 0px;
-  padding:5px;
+  top: 0px;
+  right: 0px;
   text-align: right;
+  padding: 5px;
 }
 
 .prog {
@@ -168,28 +161,6 @@ button[disabled] {
   margin-left : 5px;
   margin-right : 5px;
 }
-
-#questionArea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
-}
-
 
 
 @media (max-width: 690px) {
