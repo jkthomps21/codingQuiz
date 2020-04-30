@@ -143,6 +143,14 @@ button[disabled] {
   margin-top: -10px;
 }
 
+#highScores {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  text-align: left;
+  padding: 5px;
+}
+
 #progress {
   width: 500px;
   position: absolute;
@@ -170,9 +178,6 @@ button[disabled] {
     padding: 10px 15px;
   }
 
-  #password {
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 500px) {

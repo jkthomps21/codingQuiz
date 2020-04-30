@@ -3,6 +3,7 @@
 var start = document.getElementById("start"),
     onStart = document.getElementById("onStart"),
     quiz = document.getElementById("quiz"),
+    quizHd = document.getElementById("quizHd"),
     question = document.getElementById("question"),
     choiceBtns = document.getElementById("choiceBtns"),
     choiceA = document.getElementById("A"),
@@ -13,8 +14,13 @@ var start = document.getElementById("start"),
     counter = document.getElementById("counter"),
     timeGauge = document.getElementById("timeGauge"),
     progress = document.getElementById("progress"),
-    scoreDiv = document.getElementById("scoreContainer");
-
+    scoreDiv = document.getElementById("scoreContainer"),
+    highScores = document.getElementById("highScores"),
+    quizFt = document.getElementById("quizFt"),
+    reset = document.createElement("button"),
+    head2 = document.createElement("h2"),
+    timer = document.getElementById("timer");
+    
 // Create the questions and answers.
 let questions = [
     {
@@ -73,7 +79,6 @@ var questionTime = 15,
 let TIMER;
 let score = 0;
 
-
 start.addEventListener("click",startQuiz);
 
 // Start the quiz.
@@ -108,9 +113,7 @@ function renderProgress() {
 }
 
 // Display the counter.
-function renderCounter() {
-    
-    
+function renderCounter() {    
     if (count >= 0) {
         counter.innerHTML = "<p>You have " + count + " seconds remaining.</p>";
         timeGauge.style.width = count * gaugeUnit + "px";
@@ -128,12 +131,13 @@ function renderCounter() {
             // End the quiz and give the user a score.
             clearInterval(TIMER);
             scoreRender();
+            resetBtn();
+            storeScores();
         }
     }
 }
 
 // Verify the answer.
-
 function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
         // The answer is correct.
@@ -156,8 +160,38 @@ function checkAnswer(answer) {
         // Show the score once the quiz has ended.
         clearInterval(TIMER);
         scoreRender();
+        // Needs completeing!!!!
+        resetBtn();
+        storeScores();
     }
 }
+
+function resetBtn() {
+        
+        timer.style.display = "none";
+        question.style.display = "none";
+        choiceBtns.style.display = "none";
+        head2.innerHTML = "Would you like to take the quiz again?";
+        head2.setAttribute("id", "head2")
+        quizHd.appendChild(head2);
+        reset.innerHTML = "Reset!";
+        reset.setAttribute("id", "reset");
+        reset.setAttribute("type", "reset");
+        reset.classList.add("btn");
+        quizFt.appendChild(reset);
+
+        reset.addEventListener("click", function(e) {
+            location.reload();
+        }, false);
+}
+
+/*function storeScores(event) {
+    
+    event.preventDefault();
+    $("#highScores").hide();
+
+    var userInitials = $
+}*/
 
 // The answer is correct.
 function answerIsCorrect() {
