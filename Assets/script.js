@@ -112,6 +112,16 @@ function renderProgress() {
     }
 }
 
+// The answer is correct.
+function answerIsCorrect() {
+    document.getElementById(runningQuestion).style.backgroundColor = "mediumseagreen";
+}
+
+// The answer is wrong.
+function answerIsWrong() {
+    document.getElementById(runningQuestion).style.backgroundColor = "red";
+}
+
 // Display the counter.
 function renderCounter() {    
     if (count >= 0) {
@@ -131,8 +141,6 @@ function renderCounter() {
             // End the quiz and give the user a score.
             clearInterval(TIMER);
             scoreRender();
-            resetBtn();
-            storeScores();
         }
     }
 }
@@ -160,48 +168,55 @@ function checkAnswer(answer) {
         // Show the score once the quiz has ended.
         clearInterval(TIMER);
         scoreRender();
-        // Needs completeing!!!!
         resetBtn();
-        storeScores();
     }
 }
 
+// Reset the quiz to retake.
 function resetBtn() {
-        
-        timer.style.display = "none";
-        question.style.display = "none";
-        choiceBtns.style.display = "none";
-        head2.innerHTML = "Would you like to take the quiz again?";
-        head2.setAttribute("id", "head2")
-        quizHd.appendChild(head2);
-        reset.innerHTML = "Reset!";
-        reset.setAttribute("id", "reset");
-        reset.setAttribute("type", "reset");
-        reset.classList.add("btn");
-        quizFt.appendChild(reset);
-
-        reset.addEventListener("click", function(e) {
-            location.reload();
-        }, false);
-}
-
-/*function storeScores(event) {
     
-    event.preventDefault();
-    $("#highScores").hide();
+    timer.style.display = "none";
+    question.style.display = "none";
+    choiceBtns.style.display = "none";
+    head2.innerHTML = "Would you like to take the quiz again?";
+    head2.setAttribute("id", "head2")
+    quizHd.appendChild(head2);
+    reset.innerHTML = "Reset!";
+    reset.setAttribute("id", "reset");
+    reset.setAttribute("type", "reset");
+    reset.classList.add("btn");
+    quizFt.appendChild(reset);
+    
+    setTimeout(function() {
+        var allScores = JSON.parse(localStorage.getItem("Quiz_HS")) || [],
+            userInitials = prompt("What are your first and last initials?"),
+            userScore = Math.round(100 * score/questions.length) + "%";
+            scores = {
+                User: userInitials,
+                Score: userScore
+            };
+            
+            localStorage.setItem("Quiz_HS", JSON.stringify(allScores));
+            
+            for (var i in scores) {
+                if (scores.hasOwnProperty(i)) {
+                    var innerObj = {};
+                    innerObj[i] = scores[i];
+                    allScores.push(innerObj);
+                }
+            }
+    
+            highScores.onclick = function() {
+                console.log(allScores);
+            } 
+            
+    }, 250);
 
-    var userInitials = $
-}*/
-
-// The answer is correct.
-function answerIsCorrect() {
-    document.getElementById(runningQuestion).style.backgroundColor = "mediumseagreen";
+    reset.addEventListener("click", function(e) {
+        location.reload();
+    }, false);
 }
 
-// The answer is wrong.
-function answerIsWrong() {
-    document.getElementById(runningQuestion).style.backgroundColor = "red";
-}
 
 // Display the score.
 function scoreRender() {
@@ -209,7 +224,7 @@ function scoreRender() {
     
     // Calculate score based on number of correct answers.
     var scorePerCent = Math.round(100 * score/questions.length);
-
+    
     if (scorePerCent >= 90) {   
         scoreDiv.innerHTML += "<p>"+ scorePerCent +"% = A</p>";
     }
