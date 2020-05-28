@@ -1,22 +1,25 @@
-
 // Create and assign variables.
-var start = document.getElementById("start"),
-    onStart = document.getElementById("onStart"),
+let start = document.getElementById("start"),
+    onStart = document.getElementById("on-start"),
     quiz = document.getElementById("quiz"),
-    quizHd = document.getElementById("quizHd"),
+    quizHd = document.getElementById("quiz-hd"),
     question = document.getElementById("question"),
-    choiceBtns = document.getElementById("choiceBtns"),
+    choiceBtns = document.getElementById("choice-btns"),
     choiceA = document.getElementById("A"),
     choiceB = document.getElementById("B"),
     choiceC = document.getElementById("C"),
     choiceD = document.getElementById("D"),
     choiceE = document.getElementById("E"),
     counter = document.getElementById("counter"),
-    timeGauge = document.getElementById("timeGauge"),
+    timeGauge = document.getElementById("time-gauge"),
     progress = document.getElementById("progress"),
-    scoreDiv = document.getElementById("scoreContainer"),
-    highScores = document.getElementById("highScores"),
-    quizFt = document.getElementById("quizFt"),
+    scoreDiv = document.getElementById("score-container"),
+    allScores = JSON.parse(localStorage.getItem("scores")) || [],
+    highScoresDef = [],
+    nameScore = document.getElementById("name-score"),
+    modal = document.getElementById("score-modal"),
+    hsBtn = document.getElementById("high-scores-btn"),
+    quizFt = document.getElementById("quiz-ft"),
     reset = document.createElement("button"),
     head2 = document.createElement("h2"),
     timer = document.getElementById("timer");
@@ -70,14 +73,14 @@ let questions = [
     }
 ];
 
-var lastQuestion = questions.length - 1;
-let runningQuestion = 0,
-    count = 60;
-var questionTime = 15,
+let lastQuestion = questions.length - 1,
+    runningQuestion = 0,
+    count = 60,
+    questionTime = 15,
     gaugeWidth = 37, 
-    gaugeUnit = gaugeWidth / questionTime;
-let TIMER;
-let score = 0;
+    gaugeUnit = gaugeWidth / questionTime,
+    TIMER,
+    score = 0;
 
 start.addEventListener("click",startQuiz);
 
@@ -188,35 +191,44 @@ function resetBtn() {
     quizFt.appendChild(reset);
     
     setTimeout(function() {
-        var allScores = JSON.parse(localStorage.getItem("Quiz_HS")) || [],
-            userInitials = prompt("What are your first and last initials?"),
+        var userInitials = prompt("What are your first and last initials?"),
             userScore = Math.round(100 * score/questions.length) + "%";
-            scores = {
-                User: userInitials,
-                Score: userScore
-            };
             
-            localStorage.setItem("Quiz_HS", JSON.stringify(allScores));
-            
-            for (var i in scores) {
-                if (scores.hasOwnProperty(i)) {
-                    var innerObj = {};
-                    innerObj[i] = scores[i];
-                    allScores.push(innerObj);
-                }
-            }
-    
-            highScores.onclick = function() {
-                console.log(allScores);
-            } 
-            
+            allScores.push({name: userInitials, score: userScore});
     }, 250);
-
+        
     reset.addEventListener("click", function(e) {
-        location.reload();
+        location.reload(false);
     }, false);
 }
 
+function compareScore(a,b) {
+    if (a.score > b.score) {
+        result = -1;
+    }
+    else if (b.score > a.score) {
+        result = 1;
+    }
+    else {
+        result = 0;
+    }
+    return result;
+}
+
+function setScores() {
+    allScores.sort(compareScore);
+    if (allScores.length > 10) {
+        allScores.pop();
+    }
+    
+    localStorage.setItem("scores", JSON.stringify(allScores));
+    nameScore.innerHTML = "";
+    for (var value of allScores) {
+        var li = document.createElement("li");
+        li.textContent = value.name + ": " + value.score;
+        nameScore.appendChild(li);
+    }
+}
 
 // Display the score.
 function scoreRender() {
@@ -243,3 +255,13 @@ function scoreRender() {
     
 }
 
+hsBtn.onclick = function() {
+    modal.style.display = "block";
+    setScores();
+} 
+    
+window.onclick = function(event) { 
+    if (event.target == modal) {
+    modal.style.display = "none";
+    }
+}

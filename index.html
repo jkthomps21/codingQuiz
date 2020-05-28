@@ -13,27 +13,25 @@
     <body>
 
     <main class="wrapper">
-
         <header>
             
             <h1 style="text-align: center;">Coding Quiz</h1>
         
-            <div id="scoreContainer" style="display: none; text-align: center;"></div>
+            <div id="score-container" style="display: none; text-align: center;"></div>
             
         </header>
         
-        
         <section id="quiz" class="quiz">   
             
-            <div id="quizHd" class="quiz-header">
-                <h2 id="onStart">Are you ready?</h2>
+            <div id="quiz-hd" class="quiz-header">
+                <h2 id="on-start">Are you ready?</h2>
             </div>
 
             <div id="quiz-body">
                 
                 <div id="question" class="question"></div>
                 
-                <div id="choiceBtns">
+                <div id="choice-btns">
                     <div id="A" class="choice" onclick="checkAnswer('A')"></div>   
                     <div id="B" class="choice" onclick="checkAnswer('B')"></div>    
                     <div id="C" class="choice" onclick="checkAnswer('C')"></div>
@@ -43,26 +41,32 @@
                 
             </div>
             
-            
-            
-            <div id="quizFt" class="quiz-footer">
+            <div id="quiz-ft" class="quiz-footer">
                 <button id="start" class="btn">Start Quiz!</button>
-            
                 
                 <div id="timer">
                     <div id="counter"></div>
-                    <div id="btimeGauge"></div>
-                    <div id="timeGauge"></div>
-                </div>
-                
+                    <div id="btime-gauge"></div>
+                    <div id="time-gauge"></div>
+                </div> 
             </div>
             
-            <button id="highScores" class="highScores">High Scores</button>
+            <!--<button id="high-scores-btn" class="high-scores">High Scores</button>-->
+            <button id="high-scores-btn" class="high-scores">High Scores</button>
+
+            <div id="score-modal" class="modal">
+
+                <div class="score-content">
+                    <h2>High Scores</h2>
+                    <hr>
+                    <div id="name-score">
+                    </div>
+                </div>
+            </div>
             <div id="progress"></div>
 
         </section>
     </main>
-    
     
     <script src="Assets/script.js"></script>  
 </body>
